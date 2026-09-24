@@ -1,0 +1,58 @@
+# MicroAutoML-Agent — Development / testing configuration
+# Tiny budgets for fast iteration during development.
+# SLM disabled by default (no API key needed).
+# Tests should use this config.
+
+resource:
+  total_ram_gb: 4.0
+  os_reserved_gb: 1.0
+  max_threads: 2
+  n_jobs: 1
+  per_experiment_timeout_seconds: 60.0
+  max_disk_gb: 5.0
+
+fidelity:
+  smoke_fraction: 0.10
+  cheap_fraction: 0.30
+  medium_fraction: 0.60
+  full_fraction: 1.0
+  smoke_n_estimators: 10
+  cheap_n_estimators: 20
+  medium_n_estimators: 50
+  full_n_estimators: 100
+  cheap_cv_folds: 1
+  medium_cv_folds: 3
+  full_cv_folds: 5
+
+search:
+  time_budget_seconds: 120.0
+  initial_explore_ratio: 0.50
+  final_explore_ratio: 0.10
+  exploit_adjust_delta: 0.10
+  explore_adjust_delta: 0.10
+  plateau_window: 3
+  min_gain_threshold: 0.001
+  max_repairs_per_experiment: 2
+  smoke_survivors: 5
+  cheap_survivors: 3
+  medium_survivors: 2
+  full_survivors: 1
+  hpo_n_trials: 5
+  hpo_timeout_seconds: 60.0
+  ensemble_max_size: 3
+  ensemble_diversity_threshold: 0.85
+
+slm:
+  enabled: false
+  provider: gemini
+  model: gemini-2.0-flash
+  api_key_env: GEMINI_API_KEY
+  temperature: 0.2
+  max_tokens: 1024
+  timeout_seconds: 15.0
+  max_retries: 1
+
+verbose: true
+debug: true
+benchmark_mode: false
+random_seed: 42

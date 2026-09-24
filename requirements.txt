@@ -1,0 +1,48 @@
+# Core scientific stack
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+
+# Sklearn ecosystem
+scikit-learn>=1.4
+imbalanced-learn>=0.11
+
+# Gradient boosting
+xgboost>=2.0
+lightgbm>=4.0
+catboost>=1.2
+
+# Data validation & schemas
+pydantic>=2.0
+
+# Experiment tracking & DB
+sqlalchemy>=2.0
+
+# Resource monitoring
+psutil>=5.9
+
+# CLI
+click>=8.1
+rich>=13.0
+
+# Config
+pyyaml>=6.0
+
+# Plotting
+matplotlib>=3.7
+seaborn>=0.12
+
+# Reporting
+jinja2>=3.1
+
+# Hyperparameter optimization
+optuna>=3.4
+
+# Statistical tests
+statsmodels>=0.14
+
+# Development
+pytest>=7.4
+pytest-cov>=4.1
+pytest-timeout>=2.2
+ruff>=0.1

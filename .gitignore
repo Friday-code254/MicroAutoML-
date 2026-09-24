@@ -1,0 +1,25 @@
+# Virtual Environment
+.venv/
+env/
+venv/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# MicroAutoML Specific
+runs/
+automl.db
+experiments.db
+
+# Datasets (avoid pushing large CSVs to GitHub)
+data/
+*.csv
+*.parquet
+
+# IDEs and OS Files
+.vscode/
+.idea/
+.DS_Store
+*.swp

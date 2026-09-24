@@ -1,0 +1,100 @@
+Metadata-Version: 2.4
+Name: microautoml
+Version: 0.1.0
+Summary: MicroAutoML-Agent: Evidence-Driven, Resource-Aware Autonomous Experimentation for Tabular Machine Learning
+Author: MicroAutoML Authors
+License: MIT
+Keywords: automl,machine-learning,tabular,autonomous,hyperparameter-optimization
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.24
+Requires-Dist: pandas>=2.0
+Requires-Dist: scipy>=1.10
+Requires-Dist: scikit-learn>=1.4
+Requires-Dist: imbalanced-learn>=0.11
+Requires-Dist: xgboost>=2.0
+Requires-Dist: lightgbm>=4.0
+Requires-Dist: catboost>=1.2
+Requires-Dist: pydantic>=2.0
+Requires-Dist: sqlalchemy>=2.0
+Requires-Dist: psutil>=5.9
+Requires-Dist: click>=8.1
+Requires-Dist: rich>=13.0
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: matplotlib>=3.7
+Requires-Dist: seaborn>=0.12
+Requires-Dist: jinja2>=3.1
+Requires-Dist: optuna>=3.4
+Requires-Dist: statsmodels>=0.14
+Requires-Dist: requests>=2.31
+Provides-Extra: dashboard
+Requires-Dist: streamlit>=1.30; extra == "dashboard"
+Provides-Extra: advanced-models
+Requires-Dist: tabpfn>=2.0; extra == "advanced-models"
+Provides-Extra: benchmark
+Requires-Dist: flaml>=2.1; extra == "benchmark"
+Requires-Dist: autogluon.tabular>=1.1; extra == "benchmark"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4; extra == "dev"
+Requires-Dist: pytest-cov>=4.1; extra == "dev"
+Requires-Dist: pytest-timeout>=2.2; extra == "dev"
+Requires-Dist: ruff>=0.1; extra == "dev"
+Requires-Dist: mypy>=1.7; extra == "dev"
+Requires-Dist: pre-commit>=3.5; extra == "dev"
+
+# MicroAutoML-Agent
+
+MicroAutoML is an autonomous, agentic machine learning framework designed for tabular datasets. It replaces brute-force hyperparameter optimization (HPO) with a reasoning-driven loop powered by Small Language Models (SLMs) and deterministic rule engines. 
+
+## Features
+
+- **Agentic Planning**: Analyzes data and formulates explicit, testable hypotheses (e.g., "The target is highly skewed; applying Log1p to continuous features should stabilize variance").
+- **Multi-Fidelity Execution**: Tests risky hypotheses on tiny data slices first, saving compute for proven configurations.
+- **Self-Healing**: Automatically traps Out-Of-Memory (OOM) or Timeout errors and rewrites the experiment config on the fly.
+- **Resource Governance**: Hard-enforced limits on CPU, RAM, and Wall-Clock time.
+- **Crash Recovery**: Fully backed by an atomic SQLite memory store. Interrupt a run and resume exactly where it left off.
+- **Zero Leakage**: A strict firewall prevents any test-set inspection until the final model is explicitly selected and the search is locked.
+
+## Quickstart
+
+### Installation
+
+```bash
+git clone https://github.com/yourusername/MicroAutoML.git
+cd MicroAutoML
+pip install -e .
+```
+
+### Usage
+
+Run the fully autonomous engine:
+
+```bash
+microautoml run --data dataset.csv --target price --budget 3600 --memory-budget 8.0
+```
+
+Resume a paused run:
+```bash
+microautoml resume --run-id RUN_XXX
+```
+
+Generate the standalone HTML report for a completed run:
+```bash
+microautoml report --run-id RUN_XXX
+```
+
+## Architecture
+
+MicroAutoML is composed of 12 fully isolated phases, ranging from Data Profiling (Phase 1) to final Model Packaging (Phase 10) and Reporting (Phase 11).
+
+For a detailed breakdown of the system architecture and the Agent loop, see `docs/architecture.md`.
+For the formal evaluation metrics, see `docs/research_protocol.md`.
+
+## License
+MIT

@@ -1,0 +1,57 @@
+# MicroAutoML-Agent — Benchmark mode configuration
+# Stricter evaluation: more folds, more HPO trials, fixed seeds
+# benchmark_mode: true enforces additional invariants (no re-runs, strict split protocol)
+
+resource:
+  total_ram_gb: 5.0
+  os_reserved_gb: 1.5
+  max_threads: 4
+  n_jobs: 2
+  per_experiment_timeout_seconds: 600.0
+  max_disk_gb: 20.0
+
+fidelity:
+  smoke_fraction: 0.08
+  cheap_fraction: 0.25
+  medium_fraction: 0.60
+  full_fraction: 1.0
+  smoke_n_estimators: 20
+  cheap_n_estimators: 100
+  medium_n_estimators: 200
+  full_n_estimators: 500
+  cheap_cv_folds: 1
+  medium_cv_folds: 5
+  full_cv_folds: 10
+
+search:
+  time_budget_seconds: 7200.0
+  initial_explore_ratio: 0.50
+  final_explore_ratio: 0.10
+  exploit_adjust_delta: 0.03
+  explore_adjust_delta: 0.03
+  plateau_window: 7
+  min_gain_threshold: 0.0005
+  max_repairs_per_experiment: 2
+  smoke_survivors: 25
+  cheap_survivors: 12
+  medium_survivors: 6
+  full_survivors: 3
+  hpo_n_trials: 60
+  hpo_timeout_seconds: 1200.0
+  ensemble_max_size: 5
+  ensemble_diversity_threshold: 0.80
+
+slm:
+  enabled: true
+  provider: ollama
+  model: qwen3-4b
+  api_key_env: null
+  temperature: 0.1
+  max_tokens: 2048
+  timeout_seconds: 30.0
+  max_retries: 2
+
+verbose: true
+debug: false
+benchmark_mode: true
+random_seed: 42

@@ -1,0 +1,2 @@
+[console_scripts]
+microautoml = automl.__main__:cli
